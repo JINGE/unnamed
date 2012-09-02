@@ -27,3 +27,11 @@ if lQuery then
 		end)
 	end
 end
+
+local endTurn = E:new:keypress(function(s, key)
+	if key == 'space' then
+		if s.__active then s:click() end
+	end
+end)
+
+E:new:player

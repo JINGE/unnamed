@@ -11,26 +11,19 @@ if lQuery then
 		self.sy = 0
 		self._body = C.newImage('player.png');
 		self:draw(function(self)
+			if (keyPressed('w')) self.sy = -1
+			if (keyPressed('s')) self.sy = 1
+			if (keyPressed('a')) self.sx = -1
+			if (keyPressed('d')) self.sx = 1
+			
+			if (keyReleased('w')) self.sy = 0
+			if (keyReleased('s')) self.sy = 0
+			if (keyReleased('a')) self.sx = 0
+			if (keyReleased('d')) self.sx = 0
+			
 			self._body:drawxy(-_body.w/2, -_body.h/2, _body.w/2, _body.h/2)
 			self.x = self.x + self.sx
 			self.y = self.y + self.sy
-			--if (self.sx > 0) self.sx = self.sx - 1
-			--if (self.sx < 0) self.sx = self.sx + 1
-			--if (self.sy > 0) self.sy = self.sy - 1
-			--if (self.sy < 0) self.sy = self.sy + 1
 		end)
-		function self:processKeys(param, keyType, keyValue)
-			if (keyType == 'kp') {
-				if (keyValue = 'w') self.sy = -1
-				if (keyValue = 's') self.sy = 1
-				if (keyValue = 'a') self.sx = -1
-				if (keyValue = 'd') self.sx = 1
-			} else {
-				if (keyValue = 'w') self.sy = 0
-				if (keyValue = 's') self.sy = 0
-				if (keyValue = 'a') self.sx = 0
-				if (keyValue = 'd') self.sx = 0
-			}
-		end
 	end
 end

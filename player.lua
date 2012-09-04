@@ -8,7 +8,7 @@ if lQuery then
 		self.sx = 0
 		self.sy = 0
 		self:draw(function(self)
-			playerBody:drawxy(-playerBody.w/2, -playerBody.h/2, playerBody.w/2, playerBody.h/2)
+			playerBody:drawt(x, y, playerBody.w, playerBody.h, 0, -playerBody.w/2, -playerBody.h/2)
 			self.x = self.x + self.sx
 			self.y = self.y + self.sy
 		end)

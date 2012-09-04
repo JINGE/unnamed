@@ -1,5 +1,5 @@
 require "lib.cheetah"
-require "lib.lQuery"
+require "lib.lquery.entity"
 
 local C = cheetah
 
@@ -11,27 +11,32 @@ if lQuery then
 		self.sy = 0
 		self._body = C.newImage('player.png');
 		self:draw(function(self)
-			if (keyPressed('w')) self.sy = -1
-			if (keyPressed('s')) self.sy = 1
-			if (keyPressed('a')) self.sx = -1
-			if (keyPressed('d')) self.sx = 1
-			
-			if (keyReleased('w')) self.sy = 0
-			if (keyReleased('s')) self.sy = 0
-			if (keyReleased('a')) self.sx = 0
-			if (keyReleased('d')) self.sx = 0
-			
 			self._body:drawxy(-_body.w/2, -_body.h/2, _body.w/2, _body.h/2)
 			self.x = self.x + self.sx
 			self.y = self.y + self.sy
 		end)
+		self:keypress(function(self, key)
+			if key == 'w' then
+				self.sy = -1
+			elseif key == 's' then
+				self.sy = 1
+			elseif key == 'a' then
+				self.sx = -1
+			elseif key == 'd' then
+				self.sx = 1
+			end
+		end)
+		self:keyrelease(function(self, key)
+			if key == 'w' then
+				self.sy = 0
+			elseif key == 's' then
+				self.sy = 0
+			elseif key == 'a' then
+				self.sx = 0
+			elseif key == 'd' then
+				self.sx = 0
+			end
+		end)
 	end
 end
 
-local endTurn = E:new:keypress(function(s, key)
-	if key == 'space' then
-		if s.__active then s:click() end
-	end
-end)
-
-E:new:player

@@ -1,6 +1,3 @@
-require "lib.cheetah"
-require "lib.lquery.entity"
-
 local C = cheetah
 local playerBody = C.newImage('player.png')
 
@@ -11,7 +8,7 @@ if lQuery then
 		self.sx = 0
 		self.sy = 0
 		self:draw(function(self)
-			playerBody:drawxy(-_body.w/2, -_body.h/2, _body.w/2, _body.h/2)
+			playerBody:drawxy(-playerBody.w/2, -playerBody.h/2, playerBody.w/2, playerBody.h/2)
 			self.x = self.x + self.sx
 			self.y = self.y + self.sy
 		end)

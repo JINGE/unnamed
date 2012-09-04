@@ -1,9 +1,11 @@
 require 'lib.cheetah'
-require 'player'
+require "lib.lquery.entity"
+require 'lib.lquery.init'
 
 local C = cheetah
 C.init('Test', 800, 600, 32, '')
+require 'player'
 
-E:new(screen):player(400, 300):move(100,100)
+E:new(screen):player(400, 300)
 
 C.mainLoop()

@@ -1,5 +1,6 @@
 local C = cheetah
 local playerBody = C.newImage('player.png')
+local L = lQuery
 
 if lQuery then
 	function E:player(x, y)
@@ -11,6 +12,8 @@ if lQuery then
 			playerBody:drawt(x, y, playerBody.w, playerBody.h, 0, -playerBody.w/2, -playerBody.h/2)
 			self.x = self.x + self.sx
 			self.y = self.y + self.sy
+			
+			
 		end)
 		self:keypress(function(self, key)
 			if key == 'w' then

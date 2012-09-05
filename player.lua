@@ -1,11 +1,13 @@
 local C = cheetah
+-- Take care that you init graphics before this
+-- It caused by inability to create OpenGL textures
+-- before initializing OpenGL itself
 local playerBody = C.newImage('player.png')
-local L = lQuery
 
 if lQuery then
 	-- In this function we construct our character
 	function E:player(x, y)
-		-- Set default translition and transformation
+		-- Set translition and transformation to defaults
 		self.x = x
 		self.y = y
 		self.rotation = 0
@@ -16,11 +18,24 @@ if lQuery then
 		-- each time our char is drawing
 		self:draw(function(self)
 			-- Here we draw armor image of our char
-			playerBody:drawt(self.x, self.y, playerBody.w, playerBody.h, self.rotation+math.pi/2, playerBody.w/2, playerBody.h/2)
+			playerBody:drawt(
+				self.x, self.y,
+				playerBody.w, playerBody.h,
+				-- 0 radians is according to positive X-axis
+				-- but 'player.png' aims on top. So, we need
+				-- to additional rotate image in PI/2
+				self.rotation+math.pi/2,
+				-- initial entity center is top-left corner
+				-- and we should move center
+				playerBody.w/2, playerBody.h/2
+			)
 			-- and make it move
 			self.x = self.x + self.sx
 			self.y = self.y + self.sy
 			-- and rotate
+			-- at first we need to get vector from character
+			-- mouse, then calculate arctangent of some angle
+			-- of a rectangulant triangle
 			local dx = lQuery.mX - self.x
 			local dy = lQuery.mY - self.y
 			self.rotation = math.atan2(dy, dx)
@@ -50,5 +65,9 @@ if lQuery then
 			end
 		end)
 	end
+	
+	-- Now we can create entity by calling E:new()
+	-- and then make it player by :player()
+	-- For example E:new(screen):player(400, 300)
 end
 

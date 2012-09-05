@@ -16,7 +16,7 @@ if lQuery then
 		-- each time our char is drawing
 		self:draw(function(self)
 			-- Here we draw armor image of our char
-			playerBody:drawt(self.x, self.y, playerBody.w, playerBody.h, self.rotation, -playerBody.w/2, -playerBody.h/2)
+			playerBody:drawt(self.x, self.y, playerBody.w, playerBody.h, self.rotation+math.pi/2, playerBody.w/2, playerBody.h/2)
 			-- and make it move
 			self.x = self.x + self.sx
 			self.y = self.y + self.sy
